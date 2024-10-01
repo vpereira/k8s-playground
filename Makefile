@@ -28,4 +28,8 @@ clean:
 	@kubectl delete -f k8s/frontend/deployment.yaml -f k8s/frontend/service.yaml
 	@kubectl delete -f k8s/backend/deployment.yaml -f k8s/backend/service.yaml
 	@kubectl delete -f k8s/registry/deployment.yaml -f k8s/registry/service.yaml
+	@helm uninstall k8s-app
 
+deploy-helm:
+	@helm install k8s-app ./helm/k8s-app
+	@make push-images

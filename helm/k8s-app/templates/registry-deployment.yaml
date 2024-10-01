@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "k8s-app.fullname" . }}-registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "k8s-app.name" . }}
+      component: registry
+  template:
+    metadata:
+      labels:
+        app: {{ include "k8s-app.name" . }}
+        component: registry
+    spec:
+      containers:
+        - name: registry
+          image: registry:2
+          ports:
+            - containerPort: 5000
